@@ -1,5 +1,6 @@
 .AddArticleButton {
-    box-shadow: 3px 3px #547393;
+    box-shadow: 3px 3px #c9d2db;
+    background-color:rgb(110, 127, 143) ;
 }
 
 .Header {
@@ -10,4 +11,9 @@
 
 .ShowArticlesButton {
     box-shadow: 3px 3px #547393;
+}
+.MyArticlesButton {
+    background-color:rgb(110, 127, 143) ;
+    color: #ccc;
+    box-shadow: 3px 3px #c9d2db;
 }

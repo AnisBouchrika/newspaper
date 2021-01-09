@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { checkUserUniqueness, userSignupRequest } from '../../../store/actions/usersActions'
 import InputField from '../../../components/InputField/InputField';
-
+import './signup.css';
 // Check if E-mail is Valid or not
 const validateEmail = (email) => {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -145,7 +145,7 @@ class Signup extends Component {
         return (
             <div className="container">
                 <br />
-                <h3 className="text-center">Join Our Community!</h3>
+                <h1 className="text-center">Join Our Community and Add your article.</h1>
                 <div className="jumbotron">
                     <form onSubmit={this.handleSignup}>
                         { inputFields }

@@ -12,5 +12,6 @@
 .ViewButton {
     margin-top: -8px;
     margin-right: -7px;
-    box-shadow: 2px 2px slategrey;
+    box-shadow: 2px 2px rgb(110, 127, 143);
+   background-color:rgb(110, 127, 143) ;
 }

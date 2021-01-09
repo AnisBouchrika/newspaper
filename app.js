@@ -9,7 +9,7 @@ const users = require('./routes/usersRoute.js');
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/basic-mern-app', {
+mongoose.connect('mongodb://localhost:27017/Public-newspaper', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true

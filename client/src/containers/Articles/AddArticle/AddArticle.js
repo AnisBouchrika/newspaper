@@ -92,7 +92,7 @@ class AddArticle extends Component {
         return (
             <div className="container">
                 <br />
-                <h3 className="text-center">Add Article</h3>
+                <h3 className="text-center">Add Article:</h3>
                 <div className="jumbotron">
                     <form onSubmit={this.handleNewArticleSubmit}>
                         <InputField key={FIELDS[0].name}
