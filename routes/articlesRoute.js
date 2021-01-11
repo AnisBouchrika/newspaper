@@ -43,26 +43,33 @@ const isAuthenticated = (req, res, next) => {
         res.status(403).json({ error: 'No token provided' })
     }
 }
+
+
 /***************************get articles*********************************/
-router.get('/', (req, res) => {
-    Article.find({}, (err, articles) => {
-        res.json({ articles });
-    })
+router.get("/", (req, res) => {
+    if (req.query.search) {
+        console.log("WITH SEARCH");
+        console.log(req.query.search);
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Article.find({ "title": regex }, (err, articles) => {
+            console.log(articles);
+            res.redirect('/')
+        })
+    } else {
+        "NO SEARCH"
+        Article.find({}, (err, articles) => {
+            res.json({ articles });
+        })
+    }
 });
 
 router.get('/myarticles', isAuthenticated, (req, res) => {
-    Article.find({authorId: req.authorId}, (err, articles) => {
+    Article.find({ authorId: req.authorId }, (err, articles) => {
         if (err) throw err;
         res.json({ articles });
     })
 });
 
-router.get('/:id', (req, res) => {
-    Article.findById(req.params.id, (err, article) => {
-        if (err) throw err;
-        res.json({ article });
-    })
-});
 /***************************add new article*********************************/
 router.post('/add', isAuthenticated, (req, res) => {
     const title = req.body.title || '';
@@ -117,9 +124,29 @@ router.post('/edit/:id', isAuthenticated, (req, res) => {
 });
 /***************************delete article*********************************/
 router.delete('/delete/:id', isAuthenticated, (req, res) => {
-    Article.remove({_id: req.params.id}, err => {
+    Article.remove({ _id: req.params.id }, err => {
         res.json({ success: 'success' });
     });
 });
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+
+
+
+
+
+
+
+
+router.get('/:id', (req, res) => {
+    Article.findById(req.params.id, (err, article) => {
+        if (err) throw err;
+        res.json({ article });
+    })
+});
+
+
 
 module.exports = router;

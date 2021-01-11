@@ -17,7 +17,7 @@ export const getAllArticles = () => {
         fetch('/api/articles')
         .then(res => res.json())
         .then(res => {
-            localStorage.setItem('BasicMERNStackAppAllArticles', JSON.stringify(res.articles));
+            localStorage.setItem('NewsPaper', JSON.stringify(res.articles));
             dispatch({ type: actionTypes.GOT_ALL_ARTICLES, articles: res.articles })
         })
     };
@@ -34,7 +34,8 @@ export const getMyArticles = () => {
         })
         .then(res => res.json())
         .then(res => {
-            localStorage.setItem('BasicMERNStackAppMyArticles', JSON.stringify(res.articles));
+            console.log(res);
+            localStorage.setItem('NewsPaperArticles', JSON.stringify(res.articles));
             dispatch({ type: actionTypes.GOT_MY_ARTICLES, myArticles: res.articles })
         })
     };

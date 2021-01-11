@@ -32,7 +32,7 @@ class Home extends Component {
     }
 
     render() {
-        let allArticles = this.props.allArticles || JSON.parse(localStorage.getItem('BasicMERNStackAppAllArticles'));
+        let allArticles = this.props.allArticles || JSON.parse(localStorage.getItem('PublicNewspaperAllArticles'));
         allArticles = allArticles.map(article => (
             <Article
                 key={article._id}
@@ -45,7 +45,7 @@ class Home extends Component {
             if (this.props.myArticles) {
                 myArticles = [...this.props.myArticles];
             } else {
-                myArticles = [...JSON.parse(localStorage.getItem('BasicMERNStackAppMyArticles'))]
+                myArticles = [...JSON.parse(localStorage.getItem('PublicNewspaperMyArticles'))]
             }
             myArticles = myArticles.map(article => (
                 <Article
@@ -73,6 +73,16 @@ class Home extends Component {
                 <br />
                 <div>
                     <section className="jumbotron">
+                        
+                    <p>
+            	<form action="/api/articles" method="GET" class="form-inline">
+            		<div class="form-group">
+            			<input type="text" name="search" placeholder="Filter by title..." class="form-control"/>
+            			<input type="submit" value="Search" class="btn btn-default" />
+            		</div>
+            	</form>
+            </p>
+
                         <div className="Articles">
                             { this.state.showMyArticles ? myArticles : allArticles }
                         </div>

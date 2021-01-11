@@ -36,6 +36,7 @@ class FullArticle extends Component {
             <div className="container">
                 <br />
                 <div className="jumbotron FullArticle">
+                   
                     <h3 className="text-center">{this.props.article.title}</h3>
                     <h5 className="text-right">- By {this.props.article.author}</h5>
                     <p>{this.props.article.body}</p>
