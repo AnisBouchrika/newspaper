@@ -46,14 +46,16 @@ const isAuthenticated = (req, res, next) => {
 
 
 /***************************get articles*********************************/
-router.get("/", (req, res) => {
-    if (req.query.search) {
+router.get("/search/:search", (req, res) => {
+    console.log(req.params.search);
+    if (req.params.search != 'none') {
         console.log("WITH SEARCH");
-        console.log(req.query.search);
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        console.log(req.params.search);
+        const regex = new RegExp(escapeRegex(req.params.search), 'gi');
         Article.find({ "title": regex }, (err, articles) => {
             console.log(articles);
-            res.redirect('/')
+                        res.json({ articles });
+
         })
     } else {
         "NO SEARCH"

@@ -4,10 +4,13 @@ import { getAllArticles, getMyArticles } from '../../store/actions/articlesActio
 import Article from '../../components/Article/Article';
 import WrappedLink from '../../components/WrappedLink/WrappedLink';
 import './Home.css';
+import * as actionTypes from '../../store/actions/actionTypes';
+
 
 class Home extends Component {
     state = {
-        showMyArticles: false
+        showMyArticles: false,
+        searchValue : ''
     }
 
     componentWillMount() {
@@ -29,6 +32,22 @@ class Home extends Component {
                 showMyArticles: !prevState.showMyArticles
             }
         });
+    }
+    handleChange= (e) => {
+        var value = e.target.value;
+        this.setState({searchValue: value});
+    }
+    handleNewArticleSubmit = (search) => {
+        return dispatch => {
+ 
+            fetch(`/api/articles/search/${search}`)
+            .then(res => res.json())
+            .then(res => {   
+                localStorage.setItem('NewsPaper', JSON.stringify(res.articles));
+               this.setState({allArticles : res.articles}) 
+            })
+        };
+       
     }
 
     render() {
@@ -75,10 +94,11 @@ class Home extends Component {
                     <section className="jumbotron">
                         
                     <p>
-            	<form action="/api/articles" method="GET" class="form-inline">
+            	<form  class="form-inline">
             		<div class="form-group">
-            			<input type="text" name="search" placeholder="Filter by title..." class="form-control"/>
-            			<input type="submit" value="Search" class="btn btn-default" />
+
+            			<input type="text" name="search" defaultValue={this.state.searchValue} onChange={this.handleChange}  placeholder="Filter by title..." class="form-control"/>
+            			<input type="button" value="Search" onClick={this.handleNewArticleSubmit(this.state.searchValue)}    class="btn btn-default" />
             		</div>
             	</form>
             </p>
@@ -104,7 +124,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         initArticles: () => dispatch(getAllArticles()),
-        getMyArticles: () => dispatch(getMyArticles())
+        getMyArticles: () => dispatch(getMyArticles()),
     };
 };
 

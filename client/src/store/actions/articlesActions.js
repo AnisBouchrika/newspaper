@@ -14,7 +14,7 @@ const options = (data) => {
 
 export const getAllArticles = () => {
     return dispatch => {
-        fetch('/api/articles')
+        fetch('/api/articles/search/none')
         .then(res => res.json())
         .then(res => {
             localStorage.setItem('NewsPaper', JSON.stringify(res.articles));
