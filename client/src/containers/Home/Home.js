@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllArticles, getMyArticles } from '../../store/actions/articlesActions';
+import { getAllArticles, getMyArticles,searchArticle } from '../../store/actions/articlesActions';
 import Article from '../../components/Article/Article';
 import WrappedLink from '../../components/WrappedLink/WrappedLink';
 import './Home.css';
@@ -34,19 +34,10 @@ class Home extends Component {
         });
     }
     handleChange= (e) => {
-        var value = e.target.value;
-        this.setState({searchValue: value});
+        this.setState({searchValue: e.target.value});
     }
     handleNewArticleSubmit = (search) => {
-        return dispatch => {
- 
-            fetch(`/api/articles/search/${search}`)
-            .then(res => res.json())
-            .then(res => {   
-                localStorage.setItem('NewsPaper', JSON.stringify(res.articles));
-               this.setState({allArticles : res.articles}) 
-            })
-        };
+        // this.props.searchArticle(search)
        
     }
 
@@ -92,13 +83,19 @@ class Home extends Component {
                 <br />
                 <div>
                     <section className="jumbotron">
+
+
+
+
                         
                     <p>
-            	<form  class="form-inline">
+            	<form  class="form-inline" onKeyDown={e => e.key == "Enter" ? this.props.searchArticle(this.state.searchValue) : '' } onSubmit={(e) =>e.preventDefault()  }  >
             		<div class="form-group">
 
-            			<input type="text" name="search" defaultValue={this.state.searchValue} onChange={this.handleChange}  placeholder="Filter by title..." class="form-control"/>
-            			<input type="button" value="Search" onClick={this.handleNewArticleSubmit(this.state.searchValue)}    class="btn btn-default" />
+                        <input type="text"  defaultValue={this.state.searchValue}
+                         onChange={this.handleChange} name="search"  placeholder="Filter by title..." class="form-control"/>
+                         <input type="button" value='search'
+                         onClick={()=>this.props.searchArticle(this.state.searchValue)}    class="btn btn-default" />
             		</div>
             	</form>
             </p>
@@ -125,6 +122,8 @@ const mapDispatchToProps = dispatch => {
     return {
         initArticles: () => dispatch(getAllArticles()),
         getMyArticles: () => dispatch(getMyArticles()),
+        searchArticle: (search) => dispatch(searchArticle(search))
+
     };
 };
 

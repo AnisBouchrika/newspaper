@@ -1,14 +1,13 @@
 {
     "name": "public_newspaper",
     "version": "1.0.0",
-    "description": "Public-newspaper is an enline newspaper",
+    "description": "Public-newspaper is an web newspaper",
     "engines": {
         "node": "8.12.0"
     },
     "main": "app.js",
     "scripts": {
         "start": "nodemon app.js",
-        "heroku-postbuild": "cd client && yarn install && yarn build",
         "client": "cd client && yarn start",
         "server": "nodemon app.js"
     },

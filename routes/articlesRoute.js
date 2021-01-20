@@ -48,7 +48,7 @@ const isAuthenticated = (req, res, next) => {
 /***************************get articles*********************************/
 router.get("/search/:search", (req, res) => {
     console.log(req.params.search);
-    if (req.params.search != 'none') {
+    if (req.params.search != 'none' && req.params.search != '' ) {
         console.log("WITH SEARCH");
         console.log(req.params.search);
         const regex = new RegExp(escapeRegex(req.params.search), 'gi');
@@ -143,6 +143,7 @@ function escapeRegex(text) {
 
 
 router.get('/:id', (req, res) => {
+    if(req.params.id == 'search') return
     Article.findById(req.params.id, (err, article) => {
         if (err) throw err;
         res.json({ article });

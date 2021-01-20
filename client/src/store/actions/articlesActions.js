@@ -22,6 +22,16 @@ export const getAllArticles = () => {
         })
     };
 };
+export const searchArticle = (search) => {
+    return dispatch => {
+        fetch(`/api/articles/search/${search}`)
+        .then(res => res.json())
+        .then(res => {
+            localStorage.setItem('NewsPaper', JSON.stringify(res.articles));
+            dispatch({ type: actionTypes.GOT_ALL_ARTICLES, articles: res.articles })
+        })
+    };
+};
 
 export const getMyArticles = () => {
     return dispatch => {
@@ -34,7 +44,6 @@ export const getMyArticles = () => {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             localStorage.setItem('NewsPaperArticles', JSON.stringify(res.articles));
             dispatch({ type: actionTypes.GOT_MY_ARTICLES, myArticles: res.articles })
         })
