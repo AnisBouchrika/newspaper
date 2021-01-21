@@ -9,6 +9,7 @@
     "scripts": {
         "start": "nodemon app.js",
         "client": "cd client && yarn start",
+        "heroku-postbuild": "cd client && yarn install && yarn build",
         "server": "nodemon app.js"
     },
     "author": "Anis bouchrika",
