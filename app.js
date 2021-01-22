@@ -43,9 +43,12 @@ app.use('/api/articles', articles);
 app.use('/api/users', users);
 app.use('/', express.static(path.join(__dirname, '/client/build')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "client","build","index.html"));
-});
+
+
+app.get('*', function (req, res) {
+    const index = path.join(process.env.PWD, '/build/index.html');
+    res.sendFile(index);
+  })
 
 app.listen(PORT, () => {
     console.log('Server started on port', PORT);
