@@ -130,6 +130,9 @@ router.delete('/delete/:id', isAuthenticated, (req, res) => {
         res.json({ success: 'success' });
     });
 });
+
+
+
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
