@@ -2,6 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "dependencies": {
+        "heroku-postbuild": "npm install && npm run build",
         "axios": "^0.18.0",
         "npm-watch": "^0.7.0",
         "react": "^16.3.1",
