@@ -9,11 +9,13 @@ const users = require('./routes/usersRoute.js');
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/Public-newspaper', {
+mongoose.connect('mongodb+srv://projet:project@cluster0.zooko.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+
+/* mongoose.connect('mongodb://localhost:27017/Public-newspaper', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
-});
+}); */
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');
 });
